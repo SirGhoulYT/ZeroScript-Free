@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "ZeroScript Free × Roblox Studio Agent",
+  "version": "1.6.0",
+  "description": "ZeroScript for ChatGPT Web and Claude Web, plus local Roblox bridge support.",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://www.claude.ai/*",
+    "http://127.0.0.1/*",
+    "ws://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ZeroScript Free"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
+      "js": ["providers/chatgpt.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://claude.ai/*", "https://www.claude.ai/*"],
+      "js": ["providers/claude.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
